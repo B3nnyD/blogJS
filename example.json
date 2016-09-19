@@ -1,0 +1,19 @@
+[{
+	"id": "111",
+	"title": "1st example blog post",
+	"entry": "First paragraph.\nSecond.\netc...",
+	"created": 1174282395305,
+	"author": "System"
+}, {
+	"id": "222",
+	"title": "2nd example blog post",
+	"entry": "First paragraph.\nof 2nd example blog post.\netc...",
+	"created": 1374282395305,
+	"author": "System"
+}, {
+	"id": "333",
+	"title": "3rd example blog post",
+	"entry": "First paragraph.\nSecond.\netc...",
+	"created": 1434282395305,
+	"author": "System"
+}]

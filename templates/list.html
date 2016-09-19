@@ -1,0 +1,19 @@
+<div class="col-md-9" ng-init="loadBlog()">
+	<div class="panel panel-default" ng-repeat="entry in ctrl.entries | orderBy:'-created'">
+		<div class="panel-heading">
+
+				<p><a href="#/entry/{{entry.id}}">{{ entry.title }}</a></p>
+
+				<span class="leftFloat grey" style="top:-11px">
+					<small>by {{ entry.author }}</small>
+				</span>
+				<span class="rightFloat grey" style="top:-11px">
+					<small>{{ entry.created | date:'HH:mm, EEEE, MMM-d, y' }}</small>
+				</span>
+
+		</div>
+		<div class="panel-body">
+			<div style="white-space: pre-line;">{{ entry.entry  }}</div>
+		</div>
+	</div >
+</div>

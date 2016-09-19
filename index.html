@@ -1,0 +1,91 @@
+<!DOCTYPE html>
+<html lang="en" ng-app="blogJS">
+  <head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Simple blog.</title>
+
+
+    <!--<script type="text/javascript" src="https://getfirebug.com/firebug-lite-debug.js"></script>-->
+
+
+    <link rel="stylesheet"
+          href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" 
+          integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" 
+          crossorigin="anonymous">
+    <link rel="stylesheet" type="text/css" href="style.css">
+  </head>
+  <body>
+    <nav class="navbar navbar-inverse navbar-fixed-top" >
+	    <div class="container" >
+        	<div class="navbar-header" >
+        		<a class="navbar-brand" href="#/">{{'Simple' + ' ' + 'blog.'}}</a>
+		    </div >
+	    </div >
+    </nav >
+
+    <div class="container main-content">
+      <div class="row">
+        
+        <div ng-view></div>
+      
+        <div class="col-md-3" ng-controller="BlogInfoPanel" ng-init="getCurrentEntryID()">
+          <div class="panel panel-default" style="position: fixed;">
+            <div class="panel-heading">
+              Administration
+            </div>
+            <div class="panel-body" >
+              <ul>
+                <li>
+                  <a href="#/entry/0/edit">
+                    ...add post
+                  </a>
+                </li>
+                <li ng-if="entryMode == 'read'">
+                  <a ng-click="editEntry()">
+                    ...edit post
+                  </a>
+                </li>
+                <li ng-if="entryMode == 'read'">
+                  <a ng-click="deleteEntry()">
+                    ...delete post
+                  </a>
+                </li>
+                <br />
+                <li>
+                  <a ng-click="readLocalStorage();">
+                    ...read localStorage
+                  </a>
+                </li>
+                <li>
+                  <a ng-click="clearLocalStorage();">
+                    ...clear localStorage
+                  </a>
+                </li>
+              </ul>
+            </div>
+          </div >
+        </div>
+      </div>
+    </div>
+
+
+    <!-- jQuery (necessary for Bootstrap's JavaScript plugins) -->
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
+    <!-- AngularJS -->
+    <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.5.8/angular.min.js"></script>
+    <!-- AngularJS router -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/angular.js/1.5.8/angular-route.min.js"></script>
+    <!-- Include all compiled plugins (below), or include individual files as needed -->
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"
+            integrity="sha384-Tc5IQib027qvyjSMfHjOMaLkfuWVxZxUPnCJA7l2mCWNIpG9mGCD8wGNIcPD7Txa"
+            crossorigin="anonymous">
+    </script>
+
+	<!-- main .js with controllers -->
+    <script type="text/javascript" src="app.js"></script>
+    <!-- ngRoute configuration -->
+    <script type="text/javascript" src="config.js"></script>
+  </body>
+</html>

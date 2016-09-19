@@ -1,0 +1,26 @@
+body {
+padding-top: 50px;
+}
+
+.main-content {
+    padding: 40px 15px;
+}
+.leftFloat, .rightFloat {
+    position: relative;
+}
+
+.grey {
+    color: #aaa;
+}
+
+.leftFloat {
+    float: left;
+}
+
+.rightFloat {
+    float: right;
+}
+
+a[ng-click]{
+    cursor: pointer;
+}

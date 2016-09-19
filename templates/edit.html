@@ -1,0 +1,35 @@
+<div class="col-md-9">
+	<form name="editEntry"
+		  ng-submit="onSubmit()"
+		  ng-init="loadContent()">
+		<div class="panel panel-default" >
+			<div class="panel-heading">
+				<div class="form-group" >
+					<input type="text"
+						   class="form-control"
+						   ng-model="title"
+						   id="editEntryTitle"
+						   placeholder="Entry title"
+						   required>
+				</div >
+				<span class="leftFloat grey" style="top:-12px">
+					<small>by {{ ctrl.author }}</small>
+				</span>
+				<span class="rightFloat grey" style="top:-12px">
+					<small>{{ ctrl.created | date:'HH:mm, EEEE, MMM-d, y' }}</small>
+				</span>
+			</div>
+			<div class="panel-body" >
+				<div class="form-group">
+  					<textarea class="form-control"
+					  		  rows="15" 
+							  id="entry"
+							  ng-model="entry">
+					</textarea>
+				</div>
+				<hr />
+				<button class="btn btn-info rightFloat" type="submit">Save</button>
+			</div>
+		</div>
+	</form >
+</div>
