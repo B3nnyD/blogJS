@@ -125,16 +125,20 @@ app.controller('BlogInfoPanel', ['$scope', '$location', '$route',
 			console.log(localStorage)
 		};
 		$scope.clearLocalStorage = function(){
-			localStorage.clear();
-			$location.path('/');
-			$route.reload();
+			if(confirm('Delete all entries and load default examples?')){
+				localStorage.clear();
+				$location.path('/');
+				$route.reload();
+			};
 		};
 		$scope.editEntry = function(){
 			$location.url($location.url() + "/edit");
 		};
 
 		$scope.deleteEntry = function(){
-			$location.url($location.url() + "/delete");
+			if(confirm('Delete this entry?')){
+				$location.url($location.url() + "/delete");
+			};
 		};
 		
 	}
@@ -145,7 +149,7 @@ app.controller('BlogDeleteCtrl', ['$scope', '$location', '$route',
 	function($scope, $location, $route) {
 		var assignID = $route.current.pathParams.entryID;
 		if (assignID!='') {
-			setTimeout(function(){localStorage.removeItem("entry_" + assignID);$route.reload();},0);
+				setTimeout(function(){localStorage.removeItem("entry_" + assignID);$route.reload();},0);
 		}
 		$location.path('/');
 	}
