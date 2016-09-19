@@ -1,10 +1,12 @@
-var app = angular.module('blogJS', ['ngRoute']);
+var app = angular.module('blogJS', ['ngRoute','infinite-scroll']);
 
 // Controler for main page with list of all entries
 app.controller('BlogListCtrl', ['$scope', '$http', '$route',
 	function($scope, $http, $route) {
 		var ctrl = this;
 		ctrl.entries = [];
+		ctrl.entriesVisible = [];
+		var entriesSorted = [];
 		$scope.loadBlog = function(){
 			for (var key in localStorage) {
 				if (key.slice(0,6) === 'entry_') {
@@ -16,7 +18,8 @@ app.controller('BlogListCtrl', ['$scope', '$http', '$route',
 			if (ctrl.entries.length == 0) {
 				$http({
 					method: 'GET',
-					url: 'example.json'
+					url: 'example.json',
+					cache: 'false',
 				}).then(function successCallback(response) {
 					//	ctrl.entries = ctrl.entries.concat(response.data);
 					var newContent = false;
@@ -29,9 +32,42 @@ app.controller('BlogListCtrl', ['$scope', '$http', '$route',
 					if (newContent) {$route.reload()};
 				}, function errorCallback(response) {
 					console.log('error - example json not loaded!');
+					console.log(response);
 				});
 			};
+
+			// sort entries by date (needed for infiniteScroll)
+			var keys = [];
+			for (var i = ctrl.entries.length - 1; i >= 0; i--) {
+				keys.push(ctrl.entries[i].created + "~" + i.toString());
+			}
+			keys.sort();
+			keys.reverse();
+			for (var i = 0; i < keys.length; i++) {
+				entriesSorted.push( ctrl.entries[ Number(keys[i].split('~')[1]) ] );
+				if (i < 3) {
+					ctrl.entriesVisible.push(entriesSorted[i])
+				}
+			}
+			ctrl.entries = entriesSorted;
 		};
+
+		$scope.loadMore = function(){
+			var last = ctrl.entriesVisible.length - 1;
+			if (last+1 >= ctrl.entries.length) {
+				$scope.endOfData = true;
+			} else {
+				$scope.endOfData = false;
+				for(var i = 1; i <= 2; i++) {	//load two more entries...
+					if (last + i <= ctrl.entries.length - 1){	//...if available...
+					 	ctrl.entriesVisible.push(ctrl.entries[last+i])
+					} else {	//...else stop infiniteScroll
+					 	$scope.endOfData = true;
+					}
+				}
+			}			
+		};
+
 	}
 ]);
 

@@ -1,5 +1,5 @@
-<div class="col-md-9" ng-init="loadBlog()">
-	<div class="panel panel-default" ng-repeat="entry in ctrl.entries | orderBy:'-created'">
+<div class="col-md-9" ng-init="loadBlog()" infinite-scroll='loadMore()' infinite-scroll-distance='0' infinite-scroll-disabled=' endOfData '>
+	<div class="panel panel-default" ng-repeat="entry in ctrl.entriesVisible">
 		<div class="panel-heading">
 
 				<p><a href="#/entry/{{entry.id}}">{{ entry.title }}</a></p>
